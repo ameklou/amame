@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".activity.StartActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/logo_amame"/>
+        <LinearLayout
+            android:id="@+id/login_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Connectez vous!"
+                android:textStyle="bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:id="@+id/phoneNumber"
+                    android:inputType="phone"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:hint="Telephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+
+                android:id="@+id/login_btn"
+                android:textColor="@color/white"
+                android:layout_margin="10dp"
+                android:text="connexion"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/registration_btn"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_margin="10dp"
+                android:text="Enregistrez Vous"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/loading_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chargement en cours ..."
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

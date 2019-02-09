@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/conseil"
+        android:icon="@drawable/conseils"
+        android:title="Conseils"/>
+    <item android:id="@+id/service"
+        android:icon="@drawable/service"
+        android:title="Services"/>
+    <item android:id="@+id/forum"
+        android:icon="@drawable/forum"
+        android:title="Forum"/>
+
+</menu>

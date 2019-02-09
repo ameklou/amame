@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "378300751427",
+    "firebase_url": "https://amameapp.firebaseio.com",
+    "project_id": "amameapp",
+    "storage_bucket": "amameapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378300751427:android:8aabb29b3eb30e7b",
+        "android_client_info": {
+          "package_name": "com.ocurelab.amame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378300751427-a3s6t6f3k70hq0kdsn42mvbkp8vg2b8s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ocurelab.amame",
+            "certificate_hash": "a98aa83d5347cad57f04ee364968b280d7853ee2"
+          }
+        },
+        {
+          "client_id": "378300751427-i3en67i03nrli5vrf0h1rqdk31ps5fkd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa1ro_bffd3u2-rjRgY9JIg9LGm5ejsps"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378300751427-i3en67i03nrli5vrf0h1rqdk31ps5fkd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
