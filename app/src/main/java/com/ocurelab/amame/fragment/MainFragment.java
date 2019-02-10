@@ -57,7 +57,16 @@ public class MainFragment extends Fragment {
         posts=new ArrayList<>();
 
         PostAdapter.OnItemClickListner listner= (view1,position)->{
-            Toast.makeText(getContext(),posts.get(position).getTitle(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(),posts.get(position).getContent(),Toast.LENGTH_SHORT).show();
+            ArticleFragment articleFragment = new ArticleFragment();
+            Bundle args =new Bundle();
+            args.putString("title",posts.get(position).getTitle());
+            args.putString("category",posts.get(position).getCategory());
+            args.putString("content",posts.get(position).getContent());
+            args.putString("cover",posts.get(position).getCover());
+            articleFragment.setArguments(args);
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,articleFragment).addToBackStack(null).commit();
+
         };
         adapter=new PostAdapter(posts,getContext(),listner);
         linearLayoutManager= new LinearLayoutManager(this.getContext());
@@ -89,6 +98,7 @@ public class MainFragment extends Fragment {
                                 post.setCategory(jsonObject.getString("category"));
                                 post.setTitle(jsonObject.getString("title"));
                                 post.setCover(jsonObject.getString("cover"));
+                                post.setContent(jsonObject.getString("content"));
 
                                 posts.add(post);
 
