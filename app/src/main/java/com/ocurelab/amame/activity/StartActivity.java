@@ -108,6 +108,8 @@ public class StartActivity extends AppCompatActivity {
                         preferences.setToken(token);
                         JSONObject user = new JSONObject(jsonObject.getString("user"));
                         String username = user.getString("username");
+                        String id = user.getString("id");
+                        preferences.setUserId(id);
                         Log.d("loginRes",username);
                         preferences.setUsername(username);
                     } catch (JSONException e) {

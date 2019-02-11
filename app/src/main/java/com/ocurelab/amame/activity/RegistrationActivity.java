@@ -123,7 +123,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                         preferences.setToken(token);
                                         JSONObject user = new JSONObject(jsonObject.getString("user"));
                                         String username = user.getString("username");
-                                        Log.d("loginRes",username);
+                                        String id = user.getString("id");
+                                        preferences.setUserId(id);
                                         preferences.setUsername(username);
                                     } catch (JSONException e) {
                                         e.printStackTrace();

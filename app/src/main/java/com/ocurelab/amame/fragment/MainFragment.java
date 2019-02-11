@@ -77,12 +77,12 @@ public class MainFragment extends Fragment {
 
 
 
-        getDate();
+        getData();
 
         return view;
     }
 
-    private void getDate() {
+    private void getData() {
         final ProgressDialog progressDialog = new ProgressDialog(this.getContext());
         progressDialog.setMessage("Loading...");
         progressDialog.show();

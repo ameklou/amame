@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context=".fragment.AddTopicFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/topic_title"
+            android:hint="Titre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:text="Message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <jp.wasabeef.richeditor.RichEditor
+        android:id="@+id/editor"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
+        android:text="publier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
+
+</LinearLayout>

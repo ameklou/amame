@@ -13,6 +13,7 @@ public class Preferences {
     private static final String VERIFICATION_ID = "verification_id";
     private static final String USERNAME="username";
     private static final String TOKEN = "token";
+    private static final String USER_ID = "user_id";
 
 
     public Preferences(Context context) {
@@ -22,6 +23,9 @@ public class Preferences {
 
     public String getCredential() {
         return preferences.getString(CREDENTIAL,null);
+    }
+    public String getUserId() {
+        return preferences.getString(USER_ID,null);
     }
 
     public String getMobileNumber() {
@@ -60,8 +64,11 @@ public class Preferences {
         return preferences.getString(USERNAME,null);
     }
 
+    public void setUserId(String user_id){
+         preferences.edit().putString(USER_ID,user_id).commit();
+    }
     public void setUsername(String username){
-         preferences.edit().putString(USERNAME,username).commit();
+        preferences.edit().putString(USERNAME,username).commit();
     }
 
 
