@@ -69,6 +69,15 @@ public class ForumFragment extends Fragment {
 
 
         TopicAdapter.OnTopicClickedListner listner= (view1,position)->{
+            TopicFragment topicFragment= new TopicFragment();
+            Bundle args = new Bundle();
+            args.putString("title",topics.get(position).getTitle());
+            args.putString("content",topics.get(position).getContent());
+            args.putString("username",topics.get(position).getUsername());
+            args.putString("id",topics.get(position).getId());
+            topicFragment.setArguments(args);
+
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,topicFragment).addToBackStack(null).commit();
 
         };
 
@@ -102,6 +111,7 @@ public class ForumFragment extends Fragment {
                         topic.setTitle(jsonObject.getString("title"));
                         topic.setContent(jsonObject.getString("content"));
                         topic.setUsername(jsonObject.getString("user"));
+                        topic.setId(jsonObject.getString("id"));
 
                         topics.add(topic);
 
