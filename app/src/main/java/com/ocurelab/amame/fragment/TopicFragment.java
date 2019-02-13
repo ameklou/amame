@@ -3,6 +3,7 @@ package com.ocurelab.amame.fragment;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,16 +37,27 @@ public class TopicFragment extends Fragment {
         topicTitle=view.findViewById(R.id.title);
         topicUsername=view.findViewById(R.id.username);
         answer=view.findViewById(R.id.answer);
-
         if (getArguments() !=null){
             topicUsername.setText(getArguments().getString("username"));
             topicTitle.setText(getArguments().getString("title"));
             topicContent.setText(getArguments().getString("content"));
             id=getArguments().getString("id");
-            answer.setOnClickListener(v -> {
 
+
+            answer.setOnClickListener(v -> {
+                AnswerFragment answerFragment=new AnswerFragment();
+
+                Bundle args = new Bundle();
+                args.putString("topicId",getArguments().getString("id"));
+                answerFragment.setArguments(args);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,answerFragment).addToBackStack(null).commit();
             });
+
         }
+
+
+
+
 
 
         return view;

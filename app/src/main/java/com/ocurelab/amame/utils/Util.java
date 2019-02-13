@@ -17,6 +17,7 @@ public class Util {
     public static String OTP_BROADCAST = "com.ocurelab.amame.intent.action.CODE_RECEIVED";
 
 
+
     public static  void gotoActivity(Context context, Class<?> c){
         Intent i = new Intent(context,c);
         context.startActivity(i);
@@ -39,4 +40,7 @@ public class Util {
     public static FirebaseUser getCurrentUser(){ return FirebaseAuth.getInstance().getCurrentUser() ; }
 
     public Boolean isCurrentUserLogged(){ return (this.getCurrentUser() != null); }
+
+
+
 }
