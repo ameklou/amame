@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 public class Util {
     public static final String OTP_ORIGIN = "Phone Code";
+    public static final String PUSH_NOTIFICATION ="pushNotification" ;
     public static String OTP_EXTRA = "otp_extra";
     public static String OTP_BROADCAST = "com.ocurelab.amame.intent.action.CODE_RECEIVED";
 

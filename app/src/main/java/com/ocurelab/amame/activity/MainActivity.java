@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.ocurelab.amame.R;
+import com.ocurelab.amame.fragment.Dominique;
 import com.ocurelab.amame.fragment.ForumFragment;
 import com.ocurelab.amame.fragment.MainFragment;
 import com.ocurelab.amame.fragment.ServiceFragment;
@@ -72,6 +73,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.forum:
                 ForumFragment forumFragment = new ForumFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,forumFragment).commit();
+                break;
+            case R.id.domi:
+                Dominique dominique = new Dominique();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,dominique).commit();
                 break;
 
         }
