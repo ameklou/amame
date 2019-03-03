@@ -206,9 +206,7 @@ public class StartActivity extends AppCompatActivity {
         };
 
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            checkPermissions();
-        }
+
     }
 
     private void onValidateStep() {
@@ -249,31 +247,5 @@ public class StartActivity extends AppCompatActivity {
         }
 
     }
-    private boolean checkPermissions() {
-        String[] permissions = new String[]{Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS, Manifest.permission.BROADCAST_STICKY, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        int result;
-        List<String> listPermissionsNeeded = new ArrayList<>();
-        for (String p : permissions) {
-            result = ContextCompat.checkSelfPermission(this, p);
-            if (result != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(p);
-            }
-        }
-        if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 100);
-            return false;
-        }
-        return true;
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (requestCode == 100) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //
-            }
-            return;
-        }
-    }
 }

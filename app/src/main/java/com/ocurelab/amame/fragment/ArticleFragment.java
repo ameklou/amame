@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class ArticleFragment extends Fragment {
             String cover= getArguments().getString("cover");
 
             artTitle.setText(title);
-            artContent.setText(content);
+            artContent.setText(Html.fromHtml(content));
             artCategory.setText(category);
             Picasso.get().load(cover).into(artCover);
         }

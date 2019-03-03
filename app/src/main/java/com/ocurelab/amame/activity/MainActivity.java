@@ -13,10 +13,12 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.ocurelab.amame.R;
+import com.ocurelab.amame.fragment.AbuFragment;
 import com.ocurelab.amame.fragment.Dominique;
 import com.ocurelab.amame.fragment.ForumFragment;
 import com.ocurelab.amame.fragment.MainFragment;
 import com.ocurelab.amame.fragment.ServiceFragment;
+import com.ocurelab.amame.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
@@ -77,6 +79,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.domi:
                 Dominique dominique = new Dominique();
                 getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,dominique).commit();
+                break;
+            case R.id.abus:
+                AbuFragment abuFragment=new AbuFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,abuFragment).commit();
+                break;
+            case R.id.message:
+                UserFragment userFragment=new UserFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,userFragment).commit();
                 break;
 
         }

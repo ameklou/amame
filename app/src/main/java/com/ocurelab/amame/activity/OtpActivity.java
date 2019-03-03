@@ -35,13 +35,7 @@ public class OtpActivity extends AppCompatActivity {
     private MaterialButton validate,retour;
     private TextInputEditText phoneNumber, codeEditText;
 
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equals(Util.OTP_BROADCAST)) {
-                codeEditText.setText(intent.getStringExtra(Util.OTP_EXTRA));
-            }
-        }
-    };
+
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -114,17 +108,17 @@ public class OtpActivity extends AppCompatActivity {
 
 
     public void onDestroy() {
-        unregisterReceiver(broadcastReceiver);
+
         super.onDestroy();
     }
 
     public void onResume() {
         super.onResume();
-        registerReceiver(broadcastReceiver, new IntentFilter(Util.OTP_BROADCAST));
+
     }
 
     public void onStart() {
         super.onStart();
-        registerReceiver(broadcastReceiver, new IntentFilter(Util.OTP_BROADCAST));
+
     }
 }
