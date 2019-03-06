@@ -60,6 +60,14 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Toast.makeText(getContext(),users.get(position).getUsername(),Toast.LENGTH_SHORT).show();
+                MessageFragment messageFragment= new MessageFragment();
+                Bundle args= new Bundle();
+                args.putString("username",users.get(position).getUsername());
+                args.putString("userId",users.get(position).getId());
+                args.putString("bio",users.get(position).getBio());
+                args.putString("phone",users.get(position).getPhone());
+                messageFragment.setArguments(args);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,messageFragment).addToBackStack(null).commit();
             }
         };
 
