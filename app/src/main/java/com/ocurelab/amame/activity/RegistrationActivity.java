@@ -73,6 +73,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         RequestQueue queue = Volley.newRequestQueue(this);
         String url="https://api.amame.org/api/register/";
+        mAuth = FirebaseAuth.getInstance();
 
         if(preferences.isWaitingForCode()) {
             startActivity(new Intent(this, OtpActivity.class));
@@ -87,7 +88,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                mAuth = FirebaseAuth.getInstance();
+
                 mAuth.addAuthStateListener(mAuthListener);
             }
         }, 2000L);
@@ -160,7 +161,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(RegistrationActivity.this,"undone",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(RegistrationActivity.this,"undone",Toast.LENGTH_SHORT).show();
                         }
                     }){
                     @Override
@@ -168,6 +169,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         Map<String,String> params=new HashMap<String,String>();
                         params.put("username",username.getText().toString().trim());
                         params.put("phone",phoneNumber.getText().toString().trim());
+                        //params.put("fireId",mAuth.getUid());
                         params.put("password","open@bunshin");
                         params.put("bio","Biographie");
                         return params;

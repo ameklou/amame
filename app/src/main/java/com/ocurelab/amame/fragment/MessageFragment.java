@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
 import com.ocurelab.amame.R;
 import com.ocurelab.amame.adapter.ChatAdapter;
 import com.ocurelab.amame.adapter.DomAdapter;
@@ -57,7 +58,7 @@ public class MessageFragment extends Fragment {
     private List<Chat> chats;
     private RecyclerView.Adapter adapter;
     private String url="https://api.amame.org/api/messages/";
-
+    private FirebaseAuth auth;
 
 
     public MessageFragment() {
@@ -70,7 +71,9 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_message, container, false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Home");
+
+        auth=FirebaseAuth.getInstance();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(auth.getUid());
 
         sendMessage= view.findViewById(R.id.sendMessage);
         doMessage=view.findViewById(R.id.mess);

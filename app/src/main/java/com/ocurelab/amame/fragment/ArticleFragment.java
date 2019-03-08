@@ -9,6 +9,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,8 +20,9 @@ import com.squareup.picasso.Picasso;
  * A simple {@link Fragment} subclass.
  */
 public class ArticleFragment extends Fragment {
-    private TextView artCategory, artContent, artTitle;
+    private TextView artCategory, artTitle;
     private ImageView artCover;
+    private WebView artContent;
 
     public ArticleFragment() {
         // Required empty public constructor
@@ -44,7 +46,7 @@ public class ArticleFragment extends Fragment {
             String cover= getArguments().getString("cover");
 
             artTitle.setText(title);
-            artContent.setText(Html.fromHtml(content));
+            artContent.loadData(content,"text/html", "UTF-8");
             artCategory.setText(category);
             Picasso.get().load(cover).into(artCover);
         }

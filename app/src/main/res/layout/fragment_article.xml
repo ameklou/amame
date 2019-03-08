@@ -40,12 +40,12 @@
                     android:text="bonnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-                <TextView
+                <WebView
                     android:id="@+id/content"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="16dp"
                     android:text="bonnd"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>

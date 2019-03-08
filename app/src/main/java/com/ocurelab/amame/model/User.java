@@ -1,16 +1,25 @@
 package com.ocurelab.amame.model;
 
 public class User {
-    private String username,bio,phone,id;
+    private String username,bio,phone,id, fireId;
 
     public User() {
     }
 
-    public User(String username, String bio, String phone, String id) {
+    public String getFireId() {
+        return fireId;
+    }
+
+    public void setFireId(String fireId) {
+        this.fireId = fireId;
+    }
+
+    public User(String username, String bio, String phone, String id, String fireId) {
         this.username = username;
         this.bio = bio;
         this.phone = phone;
         this.id = id;
+        this.fireId = fireId;
     }
 
     public String getUsername() {
