@@ -1,7 +1,8 @@
 package com.ocurelab.amame.model;
 
 public class Chat {
-    private String sender,receiver,message,timestamp;
+    private String sender,receiver,message,imageUrl;
+    private long time;
 
     public Chat() {
     }
@@ -30,11 +31,19 @@ public class Chat {
         this.message = message;
     }
 
-    public String getTimestamp() {
-        return timestamp;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }

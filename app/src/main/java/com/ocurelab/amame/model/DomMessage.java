@@ -20,12 +20,13 @@ public class DomMessage {
     public DomMessage() {
     }
 
-    public DomMessage(String id, String user, String message) {
-        this.id = id;
+    public DomMessage(String user, String message, String imageUrl, Boolean receiver) {
         this.user = user;
         this.message = message;
-    }
+        this.imageUrl = imageUrl;
+        this.receiver = receiver;
 
+    }
 
     public long getTime() {
         return time;

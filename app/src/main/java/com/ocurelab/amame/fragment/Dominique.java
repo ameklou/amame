@@ -1,6 +1,7 @@
 package com.ocurelab.amame.fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -30,6 +32,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -42,7 +46,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.ocurelab.amame.R;
 import com.ocurelab.amame.adapter.DomAdapter;
 import com.ocurelab.amame.model.DomMessage;
@@ -58,6 +64,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,11 +74,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static android.app.Activity.RESULT_OK;
+
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Dominique extends Fragment {
-    private ImageButton sendMessage;
+
+    private ImageButton sendMessage, addFile;
     private TextInputEditText doMessage;
     private Preferences preferences;
     private RecyclerView messageList;
@@ -82,6 +93,8 @@ public class Dominique extends Fragment {
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
+    private static final int REQUEST_IMAGE = 2;
+    private static final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
 
 
 
@@ -100,6 +113,15 @@ public class Dominique extends Fragment {
         preferences= new Preferences(this.getContext());
         database = FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
+        addFile= view.findViewById(R.id.add_file_button);
+
+
+        addFile.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("image/*");
+            startActivityForResult(intent, REQUEST_IMAGE);
+        });
 
 
 
@@ -172,54 +194,11 @@ public class Dominique extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
         return view;
     }
 
 
 
-//    private void getData() {
-//        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest("https://api.amame.org/domi/" + preferences.getUserId(),
-//                new Response.Listener<JSONArray>() {
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        Log.d("dom",response.toString());
-//                        for (int i=0;i<response.length();i++){
-//                            try {
-//                                JSONObject jsonObject=response.getJSONObject(i);
-//                                DomMessage domMessage=new DomMessage();
-//                                domMessage.setMessage(jsonObject.getString("message"));
-//                                domMessage.setReceiver(jsonObject.getBoolean("receiver"));
-//                                domMessages.add(domMessage);
-//                                scrollToBottom();
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                        }
-//                        adapter.notifyDataSetChanged();
-//                        if (adapter.getItemCount() > 1){
-//                            messageList.getLayoutManager().smoothScrollToPosition(messageList,null,adapter.getItemCount()-1);
-//                        }
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//
-//                    }
-//                });
-//        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
-//        requestQueue.add(jsonArrayRequest);
-//    }
 
 
     private void addMessage(){
@@ -228,50 +207,12 @@ public class Dominique extends Fragment {
         dominique.put("user",preferences.getUsername());
         dominique.put("time", ServerValue.TIMESTAMP);
         dominique.put("receiver",false);
+        dominique.put("imageUrl",null);
 
 
         database.getReference("dominique").child(mAuth.getUid()).push().setValue(dominique);
         doMessage.setText("");
 
-//        StringRequest stringRequest= new StringRequest(Request.Method.POST, "https://api.amame.org/api/domis/", new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.d("ohoo",response.toString());
-//                adapter.notifyDataSetChanged();
-//                if (adapter.getItemCount() > 1){
-//                    messageList.getLayoutManager().smoothScrollToPosition(messageList,null,adapter.getItemCount()-1);
-//                }
-//                domMessages.clear();
-//                getData();
-//                doMessage.setText("");
-//            }
-//        },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//
-//                    }
-//                }){
-//            @Override
-//            protected Map<String,String> getParams(){
-//                Map<String,String> params=new HashMap<String,String>();
-//                params.put("message",doMessage.getText().toString().trim());
-//                //params.put("receiver","false");
-//                params.put("user",preferences.getUserId());
-//
-//                return params;
-//
-//        }
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String,String> params = new HashMap<String, String>();
-//                params.put("Content-Type","application/x-www-form-urlencoded");
-//                params.put("Authorization","Bearer "+preferences.getToken());
-//                return params;
-//            }
-//    };
-//        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
-//        requestQueue.add(stringRequest);
 
 }
 
@@ -290,4 +231,61 @@ public class Dominique extends Fragment {
 
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode== REQUEST_IMAGE){
+            if (resultCode==RESULT_OK){
+                if (data!=null){
+                    final Uri uri = data.getData();
+
+                    final ProgressDialog progressDialog = new ProgressDialog(this.getContext());
+                    progressDialog.setTitle("Uploading...");
+                    progressDialog.show();
+
+                    final StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/"+ UUID.randomUUID().toString());
+                    ref.putFile(uri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Map<String,Object> dominique = new HashMap<>();
+                                    dominique.put("message",null);
+                                    dominique.put("user",preferences.getUsername());
+                                    dominique.put("time", ServerValue.TIMESTAMP);
+                                    dominique.put("receiver",false);
+                                    dominique.put("imageUrl",ref.toString());
+                                    progressDialog.dismiss();
+
+                                    database.getReference("dominique").child(mAuth.getUid()).push().setValue(dominique);
+
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.dismiss();
+                                    //Toast.makeText(IssueActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                    double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                            .getTotalByteCount());
+                                    progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                                }
+                            });
+
+
+
+
+                }
+            }
+        }
+    }
+
+
 }

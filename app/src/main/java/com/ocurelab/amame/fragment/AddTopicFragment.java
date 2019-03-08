@@ -91,7 +91,7 @@ public class AddTopicFragment extends Fragment  {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, "https://api.amame.org/api/add_topic/", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //Toast.makeText(getContext(),response.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Message en attente de validation",Toast.LENGTH_LONG).show();
                 ForumFragment forumFragment= new ForumFragment();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,forumFragment).commit();
 
@@ -99,7 +99,7 @@ public class AddTopicFragment extends Fragment  {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Toast.makeText(getContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),error.toString(),Toast.LENGTH_SHORT).show();
 
             }
         }){

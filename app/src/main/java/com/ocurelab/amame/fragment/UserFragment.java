@@ -59,13 +59,14 @@ public class UserFragment extends Fragment {
         UserAdapter.OnItemClickListner listner= new UserAdapter.OnItemClickListner() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(getContext(),users.get(position).getUsername(),Toast.LENGTH_SHORT).show();
+
                 MessageFragment messageFragment= new MessageFragment();
                 Bundle args= new Bundle();
                 args.putString("username",users.get(position).getUsername());
                 args.putString("userId",users.get(position).getId());
                 args.putString("bio",users.get(position).getBio());
                 args.putString("phone",users.get(position).getPhone());
+                args.putString("fireId",users.get(position).getFireId());
                 messageFragment.setArguments(args);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame,messageFragment).addToBackStack(null).commit();
             }
@@ -90,7 +91,7 @@ public class UserFragment extends Fragment {
         JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.d("reseau",response.toString());
+
                 for(int i=0; i<response.length();i++){
                     try {
                         JSONObject jsonObject=response.getJSONObject(i);
@@ -99,6 +100,7 @@ public class UserFragment extends Fragment {
                         user.setId(jsonObject.getString("id"));
                         user.setBio(jsonObject.getString("bio"));
                         user.setPhone(jsonObject.getString("phone"));
+                        user.setFireId(jsonObject.getString("fireId"));
 
                         users.add(user);
 

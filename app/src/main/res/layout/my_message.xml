@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:aandroid="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:paddingVertical="10dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="60dp"
+    android:paddingRight="15dp"
+    android:paddingLeft="60dp"
     android:clipToPadding="false">
 
 
+    <TextView
+        android:layout_below="@+id/messageTextView"
+        android:elevation="2dp"
+        android:text="date"
+        android:textSize="12sp"
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
 
     <TextView
+        android:background="@drawable/my_message"
+        android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/message_body"
+        android:id="@+id/messageTextView"
         android:paddingVertical="12dp"
         android:paddingHorizontal="16dp"
-        android:elevation="2dp"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:text="How are you doing? This is a long message that should probably wrap."
         />
+    <ImageView
+
+        android:id="@+id/messageImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"/>
 </RelativeLayout>
